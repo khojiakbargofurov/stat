@@ -80,7 +80,8 @@ a {
 .app-container {
   display: flex;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   overflow: hidden;
 }
 
@@ -203,6 +204,7 @@ a {
   box-shadow: var(--glass-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   transform: translateZ(0); /* Force GPU acceleration */
+  overflow: hidden; /* Prevent child overflow */
 }
 
 /* Admin Dashboard Specific Form Layout */
@@ -575,8 +577,24 @@ h1, h2, h3 {
     height: 100%;
   }
 
-  .admin-table-panel, .map-view-panel {
-    min-height: 400px;
+  .glass-panel {
+    padding: 1rem !important; /* Force smaller padding on mobile */
+  }
+
+  .charts-grid {
+    gap: 1.25rem;
+  }
+
+  .section-header h2 {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .chart-actions {
+    right: 0.5rem;
+    top: 0.5rem;
   }
 }
 
