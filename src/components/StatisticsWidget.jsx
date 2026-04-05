@@ -162,8 +162,8 @@ const StatisticsWidget = ({ data }) => {
           <PieIcon size={22} />
           <h2>Obyekt Turlari</h2>
         </div>
-        <div style={{ height: '300px', width: '100%' }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ height: '300px', width: '100%', minHeight: 0, minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" debounce={50}>
             <PieChart>
               <Pie
                 data={typeStats}
@@ -188,8 +188,8 @@ const StatisticsWidget = ({ data }) => {
           <BarChart3 size={22} />
           <h2>Top Tumanlar</h2>
         </div>
-        <div style={{ height: '300px', width: '100%' }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ height: '300px', width: '100%', minHeight: 0, minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" debounce={50}>
             <BarChart data={regionStats} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" vertical={false} />
               <XAxis dataKey="region" stroke="var(--text-secondary)" fontSize={12} tickLine={false} axisLine={false} />
@@ -208,8 +208,8 @@ const StatisticsWidget = ({ data }) => {
           <Activity size={22} />
           <h2>Mashhurlik Darajasi</h2>
         </div>
-        <div style={{ height: '300px', width: '100%' }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ height: '300px', width: '100%', minHeight: 0, minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" debounce={50}>
             <LineChart data={popularityStats} margin={{ top: 10, right: 20, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" vertical={false} />
               <XAxis dataKey="name" stroke="var(--text-secondary)" fontSize={12} tickLine={false} axisLine={false} />
@@ -228,8 +228,8 @@ const StatisticsWidget = ({ data }) => {
           <LineIcon size={22} />
           <h2>Mavsumiy Faollik</h2>
         </div>
-        <div style={{ height: '300px', width: '100%' }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ height: '300px', width: '100%', minHeight: 0, minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" debounce={50}>
             <AreaChart data={seasonStats} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
@@ -254,8 +254,8 @@ const StatisticsWidget = ({ data }) => {
           <Star size={22} />
           <h2>Ekstra xizmatlar ko'rsatkichi</h2>
         </div>
-        <div style={{ height: '340px', width: '100%' }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ height: '340px', width: '100%', minHeight: 0, minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" debounce={50}>
             <RadarChart cx="50%" cy="50%" outerRadius="70%" data={servicesStats}>
               <PolarGrid stroke="rgba(125,125,125,0.2)" />
               <PolarAngleAxis dataKey="service" tick={{ fill: 'var(--text-secondary)', fontSize: 13 }} />
@@ -275,8 +275,8 @@ const StatisticsWidget = ({ data }) => {
           <Eye size={22} />
           <h2>Toifalar bo'yicha yillik tashrif</h2>
         </div>
-        <div style={{ height: '300px', width: '100%' }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ height: '300px', width: '100%', minHeight: 0, minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" debounce={50}>
             <BarChart data={visitsByCategory} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" vertical={false} />
               <XAxis dataKey="category" stroke="var(--text-secondary)" fontSize={12} tickLine={false} axisLine={false} />
@@ -299,8 +299,8 @@ const StatisticsWidget = ({ data }) => {
           <Activity size={22} />
           <h2>Eng ko'p tashrif buyurilgan obyektlar</h2>
         </div>
-        <div style={{ height: '300px', width: '100%' }}>
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ height: '300px', width: '100%', minHeight: 0, minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" debounce={50}>
             <BarChart layout="vertical" data={topVisited} margin={{ top: 10, right: 30, left: 40, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" horizontal={false} />
               <XAxis type="number" stroke="var(--text-secondary)" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => val >= 1000 ? `${(val/1000)}k` : val} />
@@ -395,9 +395,9 @@ const StatisticsWidget = ({ data }) => {
               {enlargedChart === 'topRated' && <><Trophy size={28} /> <h2>Eng yuqori reytingli obyektlar</h2></>}
               {enlargedChart === 'popularityTable' && <><Medal size={28} /> <h2>Ommabop obyektlar</h2></>}
             </div>
-            <div style={{ flex: 1, padding: '1rem', overflow: 'hidden' }}>
+            <div style={{ flex: 1, padding: '1rem', overflow: 'hidden', minHeight: 0, display: 'flex', flexDirection: 'column' }}>
               {enlargedChart === 'types' && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <PieChart>
                     <Pie
                       data={typeStats}
@@ -414,7 +414,7 @@ const StatisticsWidget = ({ data }) => {
                 </ResponsiveContainer>
               )}
               {enlargedChart === 'regions' && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <BarChart data={regionStats} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" vertical={false} />
                     <XAxis dataKey="region" stroke="var(--text-secondary)" fontSize={14} tickLine={false} axisLine={false} />
@@ -425,7 +425,7 @@ const StatisticsWidget = ({ data }) => {
                 </ResponsiveContainer>
               )}
               {enlargedChart === 'popularity' && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <LineChart data={popularityStats} margin={{ top: 20, right: 40, left: 20, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" vertical={false} />
                     <XAxis dataKey="name" stroke="var(--text-secondary)" fontSize={14} tickLine={false} axisLine={false} />
@@ -436,7 +436,7 @@ const StatisticsWidget = ({ data }) => {
                 </ResponsiveContainer>
               )}
               {enlargedChart === 'season' && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <AreaChart data={seasonStats} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
                     <defs>
                       <linearGradient id="colorAmountModal" x1="0" y1="0" x2="0" y2="1">
@@ -453,7 +453,7 @@ const StatisticsWidget = ({ data }) => {
                 </ResponsiveContainer>
               )}
               {enlargedChart === 'services' && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={servicesStats}>
                     <PolarGrid stroke="rgba(125,125,125,0.2)" />
                     <PolarAngleAxis dataKey="service" tick={{ fill: 'var(--text-secondary)', fontSize: 16 }} />
@@ -464,7 +464,7 @@ const StatisticsWidget = ({ data }) => {
                 </ResponsiveContainer>
               )}
               {enlargedChart === 'categoryVisits' && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <BarChart data={visitsByCategory} margin={{ top: 30, right: 30, left: 40, bottom: 60 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" vertical={false} />
                     <XAxis dataKey="category" stroke="var(--text-secondary)" fontSize={14} tickLine={false} axisLine={false} angle={-30} textAnchor="end" />
@@ -479,7 +479,7 @@ const StatisticsWidget = ({ data }) => {
                 </ResponsiveContainer>
               )}
               {enlargedChart === 'topVisited' && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <BarChart layout="vertical" data={topVisited} margin={{ top: 20, right: 50, left: 60, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(125,125,125,0.15)" horizontal={false} />
                     <XAxis type="number" stroke="var(--text-secondary)" fontSize={14} tickLine={false} axisLine={false} tickFormatter={(val) => val >= 1000 ? `${(val/1000)}k` : val} />
