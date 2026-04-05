@@ -547,16 +547,30 @@ h1, h2, h3 {
   }
 
   .sidebar-nav {
-    flex-direction: row; gap: 0.5rem; width: 100%; justify-content: space-around;
+    flex-direction: row; gap: 0.25rem; width: 100%; justify-content: space-around; align-items: center;
   }
   
   .nav-link {
-    flex-direction: column; gap: 0.25rem; font-size: 0.7rem; padding: 0.5rem;
-    border-radius: 8px; justify-content: center; flex: 1; text-align: center;
+    flex-direction: row; gap: 0; font-size: 0; padding: 0.75rem;
+    border-radius: 12px; justify-content: center; flex: 1; text-align: center;
+    max-width: 60px; height: 60px;
+  }
+
+  .nav-text {
+    display: none;
   }
   
   .theme-toggle-btn {
-    padding: 0.5rem; font-size: 0; justify-content: center; width: 40px; margin-left: auto;
+    padding: 0.75rem; font-size: 0; justify-content: center; 
+    width: 60px; height: 60px; margin: 0;
+    border-radius: 12px; background: rgba(125, 125, 125, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+  }
+
+  .theme-toggle-btn:hover {
+    background: rgba(125, 125, 125, 0.1);
+    color: var(--text-primary);
   }
   
   .page-content {

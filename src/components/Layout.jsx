@@ -41,7 +41,7 @@ const Layout = () => {
             end
           >
             <LayoutDashboard size={20} />
-            Asosiy Statistika
+            <span className="nav-text">Asosiy Statistika</span>
           </NavLink>
           
           <NavLink 
@@ -49,7 +49,7 @@ const Layout = () => {
             className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
           >
             <MapIcon size={20} />
-            Xarita
+            <span className="nav-text">Xarita</span>
           </NavLink>
           
           <NavLink 
@@ -57,7 +57,7 @@ const Layout = () => {
             className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
           >
             <Settings size={20} />
-            Admin Panel
+            <span className="nav-text">Admin Panel</span>
           </NavLink>
           
           <div className="sidebar-divider"></div>
