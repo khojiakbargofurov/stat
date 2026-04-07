@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { MapPin, Navigation } from 'lucide-react';
+import { MapPin, Navigation, Map as MapIcon, Route, Globe } from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -27,7 +27,23 @@ const MapController = ({ center }) => {
 
 const MapPage = ({ data }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [viewType, setViewType] = useState('satellite'); // 'standard', 'roads', 'satellite'
   const tplCenter = [41.3, 69.8];
+
+  const mapLayers = {
+    standard: {
+      url: 'http://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+      attribution: '&copy; Google Maps'
+    },
+    roads: {
+      url: 'http://mt0.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
+      attribution: '&copy; Google Maps'
+    },
+    satellite: {
+      url: 'http://mt0.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+      attribution: '&copy; Google Maps'
+    }
+  };
 
   const handleSelect = (place) => {
     setSelectedPlace(place);
@@ -35,9 +51,59 @@ const MapPage = ({ data }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div className="section-header" style={{ marginBottom: '1rem' }}>
-        <MapPin size={28} />
-        <h1>Interaktiv Xarita</h1>
+      <div className="section-header" style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <MapPin size={28} />
+          <h1>Raqamli Xarita</h1>
+        </div>
+
+        <div className="glass-panel" style={{ padding: '4px', display: 'flex', gap: '4px', borderRadius: '12px' }}>
+          <button 
+            onClick={() => setViewType('standard')}
+            className={`btn ${viewType === 'standard' ? 'btn-primary' : ''}`}
+            style={{ 
+              padding: '0.5rem 1rem', 
+              fontSize: '0.8rem', 
+              borderRadius: '8px',
+              background: viewType === 'standard' ? '' : 'transparent',
+              boxShadow: viewType === 'standard' ? '' : 'none',
+              color: viewType === 'standard' ? 'white' : 'var(--text-secondary)'
+            }}
+          >
+            <MapIcon size={16} />
+            <span className="hide-mobile" style={{ marginLeft: '8px' }}>Oddiy</span>
+          </button>
+          <button 
+            onClick={() => setViewType('roads')}
+            className={`btn ${viewType === 'roads' ? 'btn-primary' : ''}`}
+            style={{ 
+              padding: '0.5rem 1rem', 
+              fontSize: '0.8rem', 
+              borderRadius: '8px',
+              background: viewType === 'roads' ? '' : 'transparent',
+              boxShadow: viewType === 'roads' ? '' : 'none',
+              color: viewType === 'roads' ? 'white' : 'var(--text-secondary)'
+            }}
+          >
+            <Route size={16} />
+            <span className="hide-mobile" style={{ marginLeft: '8px' }}>Yo'llar</span>
+          </button>
+          <button 
+            onClick={() => setViewType('satellite')}
+            className={`btn ${viewType === 'satellite' ? 'btn-primary' : ''}`}
+            style={{ 
+              padding: '0.5rem 1rem', 
+              fontSize: '0.8rem', 
+              borderRadius: '8px',
+              background: viewType === 'satellite' ? '' : 'transparent',
+              boxShadow: viewType === 'satellite' ? '' : 'none',
+              color: viewType === 'satellite' ? 'white' : 'var(--text-secondary)'
+            }}
+          >
+            <Globe size={16} />
+            <span className="hide-mobile" style={{ marginLeft: '8px' }}>Sputnik</span>
+          </button>
+        </div>
       </div>
 
       <div className="map-page-layout">
@@ -64,14 +130,15 @@ const MapPage = ({ data }) => {
 
         <div className="map-view-panel">
           <MapContainer 
+            key={viewType} // Force re-render map container when layer changes to refresh tiles
             center={tplCenter} 
             zoom={8} 
             scrollWheelZoom={true} 
             style={{ height: '100%', width: '100%' }}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/" target="_blank">OSM</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution={mapLayers[viewType].attribution}
+              url={mapLayers[viewType].url}
             />
             {selectedPlace && <MapController center={[selectedPlace.lat, selectedPlace.lng]} />}
             
@@ -104,3 +171,5 @@ const MapPage = ({ data }) => {
 };
 
 export default MapPage;
+
+
